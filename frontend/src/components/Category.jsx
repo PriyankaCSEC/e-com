@@ -130,7 +130,7 @@ const styles = {
   container: {
     width: "100vw",
     minHeight: "100vh",
-    backgroundColor: "#f9fafb",
+    backgroundColor: "#ffffffff",
     fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
   },
   navbar: {
@@ -175,7 +175,7 @@ const styles = {
   },
   sidebar: {
     width: "20%",
-    backgroundColor: "#ffffff",
+    backgroundColor: "#ffffffff",
     borderRadius: "12px",
     boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
     padding: "16px",
@@ -185,7 +185,7 @@ const styles = {
     fontSize: "20px",
     fontWeight: "600",
     marginBottom: "16px",
-    color: "#1f2937",
+    color: "#000000ff",
     marginTop: 0,
   },
   categoryList: {
@@ -198,12 +198,12 @@ const styles = {
     padding: "8px 12px",
     borderRadius: "8px",
     marginBottom: "8px",
-    color: "#374151",
+    color: "#000000ff",
     transition: "all 0.2s",
   },
   categoryItemActive: {
-    backgroundColor: "#ec4899",
-    color: "#ffffff",
+    backgroundColor: "#a600ff6a",
+    color: "#7b2bdcff",
   },
   mainContent: {
     flex: 1,
@@ -211,7 +211,7 @@ const styles = {
   contentTitle: {
     fontSize: "24px",
     fontWeight: "600",
-    color: "#1f2937",
+    color: "#020202ff",
     marginBottom: "16px",
     marginTop: 0,
   },
@@ -221,7 +221,7 @@ const styles = {
     gap: "24px",
   },
   productCard: {
-    backgroundColor: "#ffffff",
+    backgroundColor: "#ffffffff",
     borderRadius: "12px",
     boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
     overflow: "hidden",
@@ -240,21 +240,21 @@ const styles = {
     fontSize: "18px",
     fontWeight: "600",
     margin: "0 0 8px 0",
-    color: "#1f2937",
+    color: "#000000ff",
   },
   productDescription: {
     fontSize: "14px",
-    color: "#6b7280",
+    color: "#000000ff",
     margin: "0 0 8px 0",
   },
   productPrice: {
     fontSize: "16px",
     fontWeight: "bold",
-    color: "#ec4899",
+    color: "#000000ff",
     margin: 0,
   },
   noProducts: {
-    color: "#6b7280",
+    color: "#000000ff",
     fontSize: "14px",
   },
 };

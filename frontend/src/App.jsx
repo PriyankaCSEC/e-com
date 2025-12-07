@@ -8,13 +8,13 @@ import Login from "./components/Login";
 export default function App() {
   return (
     <Router>
-      {/* <Navbar/> */}
+      <Navbar/>
       <Routes>
         {/* <Route path="/" element={<Navbar />} /> */}
         
-        {/* <Route path="/" element={<Category />} /> */}
+        <Route path="/" element={<Category />} />
         <Route path="/category/:id" element={<Product />} />
-        <Route path="/" element={<Login />} />
+        {/* <Route path="/" element={<Login />} /> */}
         {/* <Route path="/all-products" element={<Allproduct />} /> */}
       </Routes>
     </Router>
