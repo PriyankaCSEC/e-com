@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
-
+import sampleimg from '../assets/react.svg';
+import Navbar from "./Navbar";
 export default function Category() {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -46,7 +46,7 @@ export default function Category() {
   return (
     <div style={styles.container}>
       
-     
+     <Navbar/>
 
       {/* Layout container */}
       <div style={styles.mainLayout}>
@@ -104,7 +104,7 @@ export default function Category() {
                     }}
                   >
                     <img
-                      src={prod.image || "https://via.placeholder.com/200"}
+                      src={prod.image ? prod.image : sampleimg}
                       alt={prod.name}
                       style={styles.productImage}
                     />
@@ -229,6 +229,7 @@ const styles = {
     cursor: "pointer",
   },
   productImage: {
+    padding: "12px",
     width: "100%",
     height: "192px",
     objectFit: "cover",

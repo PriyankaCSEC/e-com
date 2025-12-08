@@ -18,7 +18,9 @@ app.use(express.json());
 // routes
 const productRoutes = require('./routes/product');
 const categoryRoutes = require('./routes/category');
+const authRoutes = require("./routes/authRoutes");
 
+app.use("/api/auth", authRoutes);//user
 app.use('/api/products', productRoutes);
 app.use('/api/categories', categoryRoutes);
 // // ✅ Use the category routes

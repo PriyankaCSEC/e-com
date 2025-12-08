@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -8,63 +9,54 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+
   const handleRegister = async (e) => {
     e.preventDefault();
-
     try {
-      await axios.post("http://localhost:5000/api/auth/register", {
+      const res = await axios.post("http://localhost:5000/api/auth/register", {
         name,
         email,
         password,
       });
+      if (res.data.message === "User registered successfully!") {
+      // Redirect to categories page
+      navigate("/login");  
+    }
 
-      navigate("/login");
+      alert("Account created successfully!");
     } catch (err) {
-      alert("Registration failed!");
+      alert("Failed to register");
     }
   };
 
   return (
-    <div className="container mt-5" style={{ maxWidth: "400px" }}>
-      <h3 className="text-center mb-4">Register</h3>
+    <div className="container mt-4" style={{ maxWidth: "400px" }}>
+      <h3 className="text-center">Register</h3>
 
       <form onSubmit={handleRegister}>
         <input
           type="text"
           className="form-control mb-3"
-          placeholder="Full Name"
-          value={name}
+          placeholder="Name"
           onChange={(e) => setName(e.target.value)}
-          required
         />
 
         <input
           type="email"
           className="form-control mb-3"
           placeholder="Email"
-          value={email}
           onChange={(e) => setEmail(e.target.value)}
-          required
         />
 
         <input
           type="password"
           className="form-control mb-3"
           placeholder="Password"
-          value={password}
           onChange={(e) => setPassword(e.target.value)}
-          required
         />
 
-        <button className="btn btn-primary w-100">Register</button>
+        <button className="btn btn-success w-100">Register</button>
       </form>
-
-      <p className="mt-3 text-center">
-        Already have an account?{" "}
-        <Link to="/login" className="text-primary">
-          Login here
-        </Link>
-      </p>
     </div>
   );
 }
