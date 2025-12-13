@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import sampleimg from '../assets/react.svg';
 import Navbar from "./Navbar";
+import Product from "./Product";
+
 export default function Category() {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [products, setProducts] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
 
   // Fetch categories on component mount
   useEffect(() => {
@@ -21,34 +20,10 @@ export default function Category() {
     fetchCategories();
   }, []);
 
-  // Fetch products when a category is selected
-  useEffect(() => {
-    if (!selectedCategory) return;
-
-    const fetchProducts = async () => {
-      try {
-        const res = await axios.get(
-          `http://localhost:5000/api/categories/${selectedCategory}/products`
-        );
-        setProducts(res.data);
-      } catch (err) {
-        console.error("Error fetching products:", err);
-      }
-    };
-    fetchProducts();
-  }, [selectedCategory]);
-
-  // Filter products by search term
-  const filteredProducts = products.filter((prod) =>
-    prod.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
   return (
     <div style={styles.container}>
-      
-     <Navbar/>
+      <Navbar />
 
-      {/* Layout container */}
       <div style={styles.mainLayout}>
         {/* Left Sidebar - Categories */}
         <aside style={styles.sidebar}>
@@ -56,19 +31,19 @@ export default function Category() {
           <ul style={styles.categoryList}>
             {categories.map((cat) => (
               <li
-                key={cat.id}
-                onClick={() => setSelectedCategory(cat.id)}
+                key={cat.id ?? cat._id}
+                onClick={() => setSelectedCategory(cat.id ?? cat._id)}
                 style={{
                   ...styles.categoryItem,
-                  ...(selectedCategory === cat.id ? styles.categoryItemActive : {}),
+                  ...(selectedCategory === (cat.id ?? cat._id) ? styles.categoryItemActive : {}),
                 }}
                 onMouseEnter={(e) => {
-                  if (selectedCategory !== cat.id) {
+                  if (selectedCategory !== (cat.id ?? cat._id)) {
                     e.currentTarget.style.backgroundColor = "#f3f4f6";
                   }
                 }}
                 onMouseLeave={(e) => {
-                  if (selectedCategory !== cat.id) {
+                  if (selectedCategory !== (cat.id ?? cat._id)) {
                     e.currentTarget.style.backgroundColor = "transparent";
                   }
                 }}
@@ -79,48 +54,10 @@ export default function Category() {
           </ul>
         </aside>
 
-        {/* Right Side - Products */}
-        <main style={styles.mainContent}>
-          <h2 style={styles.contentTitle}>
-            {selectedCategory
-              ? `Products in ${categories.find((c) => c.id === selectedCategory)?.name}`
-              : "Select a category"}
-          </h2>
-
-          {selectedCategory && (
-            <div style={styles.productGrid}>
-              {filteredProducts.length === 0 ? (
-                <p style={styles.noProducts}>No products found.</p>
-              ) : (
-                filteredProducts.map((prod) => (
-                  <div 
-                    key={prod.id} 
-                    style={styles.productCard}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.boxShadow = "0 10px 15px -3px rgba(0,0,0,0.1)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.boxShadow = "0 1px 3px rgba(0,0,0,0.1)";
-                    }}
-                  >
-                    <img
-                      src={prod.image ? prod.image : sampleimg}
-                      alt={prod.name}
-                      style={styles.productImage}
-                    />
-                    <div style={styles.productInfo}>
-                      <h3 style={styles.productName}>{prod.name}</h3>
-                      <p style={styles.productDescription}>
-                        {prod.description || "No description"}
-                      </p>
-                      <p style={styles.productPrice}>₹{prod.price}</p>
-                    </div>
-                  </div>
-                ))
-              )}
-            </div>
-          )}
-        </main>
+        {/* Right Side - Products (delegated to Product component) */}
+        <div style={{ flex: 1 }}>
+          <Product categoryId={selectedCategory} />
+        </div>
       </div>
     </div>
   );
@@ -132,41 +69,6 @@ const styles = {
     minHeight: "100vh",
     backgroundColor: "#ffffffff",
     fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-  },
-  navbar: {
-    backgroundColor: "#ffffff",
-    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-    padding: "12px 24px",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  logo: {
-    fontSize: "24px",
-    fontWeight: "bold",
-    color: "#1f2937",
-    margin: 0,
-  },
-  searchContainer: {
-    position: "relative",
-    width: "33%",
-  },
-  searchIcon: {
-    position: "absolute",
-    left: "12px",
-    top: "50%",
-    transform: "translateY(-50%)",
-    color: "#6b7280",
-    fontSize: "14px",
-  },
-  searchInput: {
-    width: "100%",
-    border: "1px solid #d1d5db",
-    borderRadius: "9999px",
-    padding: "8px 16px 8px 36px",
-    fontSize: "14px",
-    outline: "none",
-    boxSizing: "border-box",
   },
   mainLayout: {
     display: "flex",
@@ -202,60 +104,7 @@ const styles = {
     transition: "all 0.2s",
   },
   categoryItemActive: {
-    backgroundColor: "#a600ff6a",
-    color: "#7b2bdcff",
-  },
-  mainContent: {
-    flex: 1,
-  },
-  contentTitle: {
-    fontSize: "24px",
-    fontWeight: "600",
-    color: "#020202ff",
-    marginBottom: "16px",
-    marginTop: 0,
-  },
-  productGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-    gap: "24px",
-  },
-  productCard: {
-    backgroundColor: "#ffffffff",
-    borderRadius: "12px",
-    boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
-    overflow: "hidden",
-    transition: "box-shadow 0.3s",
-    cursor: "pointer",
-  },
-  productImage: {
-    padding: "12px",
-    width: "100%",
-    height: "192px",
-    objectFit: "cover",
-  },
-  productInfo: {
-    padding: "16px",
-  },
-  productName: {
-    fontSize: "18px",
-    fontWeight: "600",
-    margin: "0 0 8px 0",
-    color: "#000000ff",
-  },
-  productDescription: {
-    fontSize: "14px",
-    color: "#000000ff",
-    margin: "0 0 8px 0",
-  },
-  productPrice: {
-    fontSize: "16px",
-    fontWeight: "bold",
-    color: "#000000ff",
-    margin: 0,
-  },
-  noProducts: {
-    color: "#000000ff",
-    fontSize: "14px",
+    backgroundColor: " #7b2bdcff",
+    color: " #ffffffff",
   },
 };

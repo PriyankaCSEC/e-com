@@ -7,7 +7,8 @@ const app = express(); // ✅ must come before app.use()
 
 //Enable CORS in backend/index.js
 
-app.use(cors({ origin: 'http://localhost:5173' }));
+// app.use(cors({ origin: 'http://localhost:5173' })); //allow only this origin
+app.use(cors()); //allow any origin
 
 
 dotenv.config();
@@ -19,6 +20,7 @@ app.use(express.json());
 const productRoutes = require('./routes/product');
 const categoryRoutes = require('./routes/category');
 const authRoutes = require("./routes/authRoutes");
+
 
 app.use("/api/auth", authRoutes);//user
 app.use('/api/products', productRoutes);

@@ -9,14 +9,14 @@ import Register from "./components/Register";
 export default function App() {
   return (
     <Router>
-      {/* <Navbar/> */}
+      
       <Routes>
-        {/* <Route path="/" element={<Navbar />} /> */}
+      
         
         <Route path="/category" element={<Category />} />
         <Route path="/category/:id" element={<Product />} />
         {/* Auth */}
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         
       </Routes>

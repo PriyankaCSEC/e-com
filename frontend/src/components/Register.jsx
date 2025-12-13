@@ -30,33 +30,60 @@ export default function Register() {
   };
 
   return (
-    <div className="container mt-4" style={{ maxWidth: "400px" }}>
-      <h3 className="text-center">Register</h3>
+    <div className="register-outer min-h-screen flex items-center justify-center px-4">
+      <div className="w-full max-w-md">
+        <div className="register-card rounded-lg p-6 shadow-md">
+          <h3 className="text-center text-2xl font-semibold mb-6 text-black">Register</h3>
 
-      <form onSubmit={handleRegister}>
-        <input
-          type="text"
-          className="form-control mb-3"
-          placeholder="Name"
-          onChange={(e) => setName(e.target.value)}
-        />
+          <form onSubmit={handleRegister} className="space-y-4">
+            <input
+              type="text"
+              className="block w-full px-4 py-2 rounded-md bg-gray-50 border border-gray-200 text-black placeholder-gray-500"
+              placeholder="Name"
+              onChange={(e) => setName(e.target.value)}
+            />
 
-        <input
-          type="email"
-          className="form-control mb-3"
-          placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
+            <input
+              type="email"
+              className="block w-full px-4 py-2 rounded-md bg-gray-50 border border-gray-200 text-black placeholder-gray-500"
+              placeholder="Email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
 
-        <input
-          type="password"
-          className="form-control mb-3"
-          placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
+            <input
+              type="password"
+              className="block w-full px-4 py-2 rounded-md bg-gray-50 border border-gray-200 text-black placeholder-gray-500"
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
 
-        <button className="btn btn-success w-100">Register</button>
-      </form>
+            <button
+              type="submit"
+              className="w-full py-2 rounded-md text-white font-medium register-btn"
+            >
+              Register
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <style>{`
+        .register-outer {
+          background-color: #7b2bdcff;
+        }
+
+        .register-card {
+          background-color: #ffffff;
+          color: #0b1220;
+        }
+
+        .register-btn {
+          background-color: #7b2bdcff !important;
+        }
+        .register-btn:hover {
+          filter: brightness(0.95);
+        }
+      `}</style>
     </div>
   );
 }

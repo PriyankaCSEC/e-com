@@ -16,63 +16,73 @@ const Navbar = memo(() => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     setUser(null);
-    navigate("/login");
+    navigate("/");
   };
 
   return (
-    <div
-      className="navbar navbar-expand-lg bg-body-tertiary navbar bg-primary"
-      data-bs-theme="light"
-    >
-      <div className="container-fluid">
-        <a className="navbar-brand">
-          Navbar
-        </a>
+    <header className="site-navbar sticky top-0 z-50 bg-white/5 backdrop-blur-sm">
+      <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Brand */}
+          <div className="flex-shrink-0">
+            <a
+              className="text-xl font-semibold cursor-pointer"
+              onClick={() => navigate("/")}
+            >
+              mesho
+            </a>
+          </div>
 
-        {/* <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-        </button> */}
+          {/* Right side: auth buttons / profile */}
+          <div className="flex items-center space-x-3">
+            {!user && (
+              <div className="flex items-center">
+                <button
+                  className="btn px-4 py-1 rounded-md text-sm font-medium"
+                  onClick={() => navigate("/login")}
+                >
+                  Login
+                </button>
 
+                <button
+                  className="btn px-4 py-1 rounded-md text-sm font-medium"
+                  onClick={() => navigate("/register")}
+                >
+                  Register
+                </button>
+              </div>
+            )}
 
-          {/* ---------------------------- USER PROFILE SECTION ---------------------------- */}
-          {!user && (
-            <div>
-              <button
-                className="btn btn-light me-2"
-                onClick={() => navigate("/login")}
-              >
-                Login
-              </button>
-              <button
-                className="btn btn-warning"
-                onClick={() => navigate("/register")}
-              >
-                Register
-              </button>
-            </div>
-          )}
+            {user && (
+              <div className="flex items-center space-x-3">
+                <style>{`
+                  .site-navbar .btn, .site-navbar button {
+                    background-color: #7b2bdcff !important;
+                    color: #ffffff !important;
+                    border-color: transparent !important;
+                  }
 
-          {user && (
-            <div className="d-flex align-items-center">
-              <span className="me-3 text-black fw-bold">
-                👤 {user.name}
-              </span>
+                  /* Keep readable text for light/warning variants if they appear */
+                  .site-navbar .btn.btn-light,
+                  .site-navbar .btn.btn-warning {
+                    color: #000000 !important;
+                  }
+                `}</style>
 
-              <button className="btn btn-danger btn-sm" onClick={logout}>
-                Logout
-              </button>
-            </div>
-          )}
+                <span className="text-sm font-medium">👤 {user.name}</span>
+
+                <button
+                  className="btn px-3 py-1 rounded-md text-sm font-medium"
+                  onClick={logout}
+                >
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    
+    </header>
   );
 });
 
