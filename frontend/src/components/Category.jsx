@@ -67,7 +67,7 @@ const styles = {
   container: {
     width: "100vw",
     minHeight: "100vh",
-    backgroundColor: "#ffffffff",
+    backgroundColor: " #7b2bdcff",
     fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
   },
   mainLayout: {
@@ -79,7 +79,7 @@ const styles = {
     width: "20%",
     backgroundColor: "#ffffffff",
     borderRadius: "12px",
-    boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+    boxShadow: " rgba(0, 0, 0, 1)",
     padding: "16px",
     height: "fit-content",
   },
@@ -107,4 +107,4 @@ const styles = {
     backgroundColor: " #7b2bdcff",
     color: " #ffffffff",
   },
-};
+};                                         

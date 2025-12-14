@@ -20,7 +20,7 @@ export default function Register() {
       });
       if (res.data.message === "User registered successfully!") {
       // Redirect to categories page
-      navigate("/login");  
+      navigate("/category");  
     }
 
       alert("Account created successfully!");
@@ -64,6 +64,9 @@ export default function Register() {
               Register
             </button>
           </form>
+          <div className="mt-2">
+          <p className="text-sm text-gray-600">create account bitch</p>
+        </div>
         </div>
       </div>
 

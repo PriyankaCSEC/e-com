@@ -24,13 +24,13 @@ const Navbar = memo(() => {
       <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Brand */}
-          <div className="flex-shrink-0">
-            <a
+          <div className="flex-shrink-0 text-xl font-semibold cursor-pointer">
+            {/* <a
               className="text-xl font-semibold cursor-pointer"
               onClick={() => navigate("/")}
-            >
+            > */}
               mesho
-            </a>
+            {/* </a> */}
           </div>
 
           {/* Right side: auth buttons / profile */}
@@ -39,7 +39,7 @@ const Navbar = memo(() => {
               <div className="flex items-center">
                 <button
                   className="btn px-4 py-1 rounded-md text-sm font-medium"
-                  onClick={() => navigate("/login")}
+                  onClick={() => navigate("/")}
                 >
                   Login
                 </button>
@@ -57,8 +57,8 @@ const Navbar = memo(() => {
               <div className="flex items-center space-x-3">
                 <style>{`
                   .site-navbar .btn, .site-navbar button {
-                    background-color: #7b2bdcff !important;
-                    color: #ffffff !important;
+                    background-color: #ffffffff !important;
+                    color: #000000ff !important;
                     border-color: transparent !important;
                   }
 

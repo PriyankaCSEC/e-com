@@ -25,13 +25,14 @@ const authRoutes = require("./routes/authRoutes");
 app.use("/api/auth", authRoutes);//user
 app.use('/api/products', productRoutes);
 app.use('/api/categories', categoryRoutes);
-// // ✅ Use the category routes
+//  Use the category routes
 // app.use("/api/categories", categoryRoutes);
 
 // DB connection
-sequelize.sync({ alter: true })
+sequelize.sync({ alter: false })
   .then(() => console.log('✅ Models synced!'))
   .catch(err => console.error('❌ DB Sync Error:', err));
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+        
